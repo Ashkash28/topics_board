@@ -1,0 +1,44 @@
+<div ng-controller='wallController'>
+	<div class='top'>
+		<h2>{{topic.username}} posted a topic:</h2>
+		<h4>{{topic.name}}</h4>
+		<a href='/' ng-click='logout()'>LOGOUT</a><br><br>
+		<a href='#/dashboard'>DASHBOARD</a>
+	</div>
+	{{wall}}
+	<div class='bottom'>
+		<h2>Post your answer here...</h2>
+		<textarea ng-model='newPost.text'></textarea>
+		<input type='submit' value='Post' ng-click='addPost(wall, {text: newPost.text})'>
+		<div class='post'>
+			<table>
+				<tr ng-repeat='post in posts'>
+
+					<td><a href='#/profile/{{post.username}}'>{{post.username}}</a>: {{post.text}}  <input type='submit' value='+' ng-model = 'upvoted' ng-click='upvote(post._id, post.upvote)'>{{post.upvote}}  <input type='submit' value='-' ng-click='downvote(post._id, post.downvote)'>{{post.downvote}}
+						
+
+						<ul ng-repeat='comment in comments'>
+							<li ng-repeat='key in comment'><a href='#/profile/{{key.username}}'>{{key.username}}</a>: {{key.text}}</li>
+						</ul>
+						<div class='comment'>
+
+							<textarea ng-model='newComment.text'></textarea>
+							<input type='submit' value='Comment' ng-click='addComment(post._id, {text: newComment.text})'>
+
+
+						</div>
+						
+					</td>
+				</tr>
+				<!-- <tr ng-repeat='comment in comments'>
+					
+				</tr> -->
+			</table>
+		</div>
+
+		<!-- <h4>Comment</h4>
+		<textarea></textarea>
+		<input type='submit' value='Comment'> -->
+	</div>
+
+</div>

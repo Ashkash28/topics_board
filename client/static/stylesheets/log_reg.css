@@ -1,0 +1,19 @@
+body {
+	width: 970px;
+}
+
+.register{
+	display: inline-block;
+	margin-left: 20px;
+}
+
+.signin{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 300px;
+	position: absolute;
+}
+
+.success{
+	color: green;
+}

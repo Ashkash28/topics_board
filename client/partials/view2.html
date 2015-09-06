@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Dashboard</title>
+	</head>
+	<body>
+		<div ng-controller='usersController'>
+			<h1>Welcome</h1>
+			<div class='top'>
+				<div class='middle'>
+					<input type='text' ng-model='filter_category' placeholder='search...'>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Category</th>	
+							<th>Topic</th>
+							<th>User Name</th>
+							<th>Posts</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='topic in topics | filter: filter_category'>
+							<td>{{topic.category}}</td>
+							<td><a href='#/topic/{{topic._id}}'>{{topic.name}}</a></td>
+							<td><a href='#/profile/{{topic.username}}'>{{topic.username}}</a></td>
+							<td>{{topic.post_counter}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class='bottom'>
+				<h3>Add a new Topic</h3>
+				Topic: <input ng-model='newTopic.name' type='text'>
+				Description: <input ng-model='newTopic.description' type='text'>
+				Category: <select ng-model='newTopic.category'>
+							<option value='HTML'>HTML</option>
+							<option value='Ruby'>Ruby</option>
+							<option value='MySQL'>MySQL</option>
+							<option value='UX'>UX</option>
+						  </select>
+				<input type='submit' value='Submit' ng-click='addTopic(newTopic)'>
+			</div>
+		</div>
+	</body>
+</html>
