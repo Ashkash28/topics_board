@@ -5,62 +5,31 @@ myAppModule.controller('usersController', function($scope, $location, userFactor
 	$scope.topics = [];
 	$scope.topic = '';
 	$scope.posts = [];
-	$scope.person = localStorageService.get('name');
+	$scope.user = localStorageService.get('user');
 
 
+	userFactory.getTopics(function(res)
+	{
+		$scope.topics = res;
+	})
 
-	// userFactory.getoneUser(function(data){
-	// 	$scope.user = data;
-	// })
-
-
-	userFactory.getTopics(function(data){
-			$scope.topics = data;
-			// console.log(data);
-		})
-
-	$scope.addUser = function(){
-
-		userFactory.addUser($scope.newUser, function(data)
-		{	
-			localStorageService.set('name', data.name);
-			$scope.name = data.name;
-			$scope.newUser = {};
-			$location.path('/dashboard');
-		})
-	}
-
-	$scope.addTopic = function(data){
-		console.log('hello');
-		data.username = localStorageService.get('name');
-		console.log('hello');
-		userFactory.addTopic(data, function(data)
-		{	
-
-			$scope.topics = data;
-			$scope.topics = {};
-
-			userFactory.getTopics(function(data){
-				$scope.topics = data;
-				console.log(data);
-			})
+	$scope.addTopic = function(req)
+	{
+		userFactory.addTopic(req, $scope.user.id, function(res)
+		{
 
 		})
 
-		userFactory.updateUserTopic(data, function(data)
-		{	
-			// console.log('hi1');
-
-			$scope.topics = data;
-			$scope.topics = {};
-
+		userFactory.getTopics(function(res)
+		{
+			$scope.topics = res;
 		})
 
+		userFactory.incUT($scope.user.id, function(res)
+		{
+			
+		})
 
 	}
-
-	
-
-
 
 })

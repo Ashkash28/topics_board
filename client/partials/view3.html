@@ -1,12 +1,10 @@
-<body ng-app='myAppModule'>
-	<div ng-controller='profileController'>
-		<a href='/'>LOGOUT</a><br><br>
-		<a href='#/dashboard'>DASHBOARD</a>
-		<h1>Username: {{profile}}</h1>
-		
-		<h3>Posted..</h3>
-		<p>{{user.topic_counter}} Topic</p>
-		<p>{{user.post_counter}} Posts</p>
-		<p>{{user.comment_counter}} Comment</p>
-	</div>
-</body>
+<div ng-controller='loggedInController'>
+	<input type="submit" value="logout" ng-click="logout()"><br><br>
+	<a href='#/dashboard'>DASHBOARD</a>
+	<h1>Username: {{user.username}}</h1>
+	
+	<h3>Posted..</h3>
+	<p>{{user.topic_counter}} Topic</p>
+	<p>{{user.post_counter}} Posts</p>
+	<p>{{user.comment_counter}} Comment</p>
+</div>

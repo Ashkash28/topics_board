@@ -1,137 +1,98 @@
 myAppModule.controller('wallController', function($scope, $location, userFactory, $routeParams, localStorageService)
 {
 	$scope.topic = '';
+	$scope.user = localStorageService.get('user');
 
 	$scope.wall = $routeParams.id;
 
 
-	// console.log($scope.wall);
-
-	userFactory.getoneTopic($routeParams.id, function(data){
-		// console.log(data);
-		$scope.topic = data;
-		// console.log(data);
+	userFactory.getaTopic($routeParams, function(res)
+	{
+		$scope.topic = res;
 	})
 
-	userFactory.getPosts($routeParams.id, function(data){
-		$scope.posts = data;
-		console.log('POST STUFF', data);
-		// console.log(data[0]._id);
-		for(var i = 0; i<data.length; i++){
-			// console.log(data[1]);
-
-			userFactory.getComments(data[i]._id, function(output){
-				console.log('here is the output', output);
-				$scope.comments = output;
-				// console.log('POST UPDATE', data);
-			})
-		}
-
-		// $scope.comments = output;
+	userFactory.getPosts($routeParams, function(res)
+	{
+		$scope.posts = res;
 	})
 
-	$scope.addPost = function(id, data){
-		// console.log(data);
-		// console.log(id)
-		data.username = localStorageService.get('name');
-		// console.log('hi', data);
-		// console.log('why', data2);
-		userFactory.addPost(id, data, function(data)
-		{
-			$scope.posts = data;
-			$scope.posts = {};
-			// console.log('POST STUFF', data);
+	userFactory.getComments(function(res)
+	{
+		$scope.comments = res;
+	})
 
-			userFactory.getPosts(id, function(data){
-				$scope.posts = data;
-				// console.log('POST UPDATE', data);
-			})
-		})
-		// console.log(data);
-		userFactory.updateUSERPostCounter(data, function(data)
+	$scope.addPost = function(data)
+	{
+		userFactory.addPost($routeParams, data, $scope.user.id, function(res)
 		{
-			$scope.posts = data;
-			$scope.posts = {};
+
 		})
 
-		// console.log(id);
-
-		userFactory.updateTOPICPostCounter(id, function(data)
+		userFactory.getPosts($routeParams, function(res)
 		{
-			$scope.posts = data;
-			$scope.posts = {};
+			$scope.posts = res;
 		})
 
-	}
-
-	//UPVOTE
-
-	$scope.upvote = function(id, data){
-		console.log(id);
-		console.log('data', data);
-
-		userFactory.upvote(id, data, function(data)
+		userFactory.incTopCt($routeParams, function(res)
 		{
-			$scope.posts = data;
+			
+		})
 
-			userFactory.getPosts($routeParams.id, function(data){
-				$scope.posts = data;
-
-			})
+		userFactory.incUP($scope.user.id, function(res)
+		{
 
 		})
 	}
 
-	//DOWNVOTE
-
-	$scope.downvote = function(id, data){
-		console.log(id);
-		userFactory.downvote(id, data, function(data)
+	$scope.addComment = function(id, data)
+	{
+		console.log('cont', id, data);
+		userFactory.addComment(id, data, $scope.user.id, function(res)
 		{
-			$scope.posts = data;
 
-			userFactory.getPosts($routeParams.id, function(data){
-				$scope.posts = data;
+		})
 
-			})
+		userFactory.getComments(function(res)
+		{
+			$scope.comments = res;
+		})
 
+		userFactory.incUC($scope.user.id, function(res)
+		{
+			
 		})
 	}
 
-
-	$scope.addComment = function(id, data){
-		// console.log(data);
-		// console.log(id)
-		data.username = localStorageService.get('name');
-		// console.log('hi', data);
-		// console.log('why', data2);
-		userFactory.addComment(id, data, function(data)
+	$scope.upVote = function(postId)
+	{
+		userFactory.upVote(postId, function(res)
 		{
-			$scope.comments = data;
-			$scope.comments = {};
-			// console.log('POST STUFF', data);
 
-			userFactory.getComments(id, function(data){
-				$scope.comments = data;
-				// console.log('POST UPDATE', data);
-			})
-		})
-		// console.log(data);
-		userFactory.updateUSERCommentCounter(data, function(data)
-		{
-			$scope.comments = data;
-			$scope.comments = {};
 		})
 
-		// console.log(id);
+		userFactory.getPosts($routeParams, function(res)
+		{
+			$scope.posts = res;
+		})
+	}
 
+	$scope.downVote = function(postId)
+	{
+		userFactory.downVote(postId, function(res)
+		{
+			
+		})
+
+		userFactory.getPosts($routeParams, function(res)
+		{
+			$scope.posts = res;
+		})
 	}
 
 	$scope.logout = function(){
-		localStorageService.remove()
+		console.log('hi');
+		localStorageService.remove('user')
+		$location.path('/');
 	}
-
-
-
 
 })

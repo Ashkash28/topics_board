@@ -1,15 +1,16 @@
 myAppModule.controller('profileController', function($scope, $location, userFactory, $routeParams, localStorageService)
 {
-	$scope.user = '';
+	$scope.user = localStorageService.get('user');
+
 	$scope.profile = $routeParams.id;
 
 	$scope.addUser = function(isValid) 
 	{
 		if(isValid)
 		{
-			userFactory.registerUser($scope.newUser, function(data)
+			userFactory.registerUser($scope.newUser, function(res)
 			{
-				$scope.success = data;
+				$scope.success = res;
 			})
 				// $scope.newUser = {};
 		}
@@ -21,7 +22,15 @@ myAppModule.controller('profileController', function($scope, $location, userFact
 		{
 			userFactory.loginUser($scope.returnUser, function(data)
 			{
-				
+				if(data.error != undefined)
+				{
+					$scope.error = data.error;
+				}
+				else
+				{
+					localStorageService.set('user', data);
+					$location.path('/dashboard');
+				}
 			})
 		}
 	}

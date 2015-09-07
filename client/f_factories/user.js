@@ -10,19 +10,138 @@ myAppModule.factory('userFactory', function($http){
 
 	var factory = {};
 
-	factory.registerUser = function(data, callback)
+	factory.registerUser = function(req, callback)
 	{
-		$http.post('/newUser', data).success(function(data)
+		$http.post('/newUser', req).success(function(res)
 		{
-			callback(data);
+			callback(res);
 		})
 	}
 
-	factory.loginUser = function(data, callback)
+	factory.loginUser = function(req, callback)
 	{
-		$http.post('/loginUser', data).success(function(data)
+		$http.post('/loginUser', req).success(function(res)
+		{
+			callback(res);
+		})
+	}
+
+	factory.addTopic = function(req, req2, callback)
+	{
+		console.log(req, req2);
+		$http.post('/addTopic/'+ req2, req).success(function(res)
+		{
+			console.log(res);
+		})
+	}
+
+	factory.getTopics = function(callback)
+	{
+		$http.get('/getTopics').success(function(res)
+		{
+			callback(res);
+		})
+	}
+
+	factory.getaTopic = function(req, callback)
+	{
+		$http.post('/getaTopic', req).success(function(res)
+		{
+			callback(res);
+		})
+	}
+
+	factory.getPosts = function(req, callback)
+	{
+		$http.post('/getPosts', req).success(function(res)
+		{
+			callback(res);
+		})
+	}
+
+	factory.getComments = function(callback)
+	{
+		$http.get('/getComments').success(function(res)
+		{
+			callback(res);
+		})
+	}
+
+	factory.addPost = function(req1, req2, req3, callback)
+	{
+		console.log(req1);
+		console.log(req2);
+		console.log(req3);
+		$http.post('/addPost/' + req3, {id: req1, text: req2}).success(function(res)
 		{
 
+		})
+	}
+
+	factory.addComment = function(req1, req2, req3, callback)
+	{
+		console.log(req1);
+		console.log(req2);
+		console.log(req3);
+		$http.post('/addComment/'+ req3, {id: req1, text: req2}).success(function(res)
+		{
+
+		})
+	}
+
+	factory.upVote = function(req, callback)
+	{
+		$http.post('/upvote/'+ req).success(function(res)
+		{
+
+		})
+	}
+
+	factory.downVote = function(req, callback)
+	{
+		$http.post('/downvote/'+ req).success(function(res)
+		{
+
+		})
+	}
+
+	factory.incTopCt = function(req, callback)
+	{
+		$http.post('/inctopct', req).success(function(res)
+		{
+
+		})
+	}
+
+	factory.incUP = function(req, callback)
+	{
+		$http.post('/incup/' + req).success(function(res)
+		{
+
+		})
+	}
+
+	factory.incUC = function(req, callback)
+	{
+		$http.post('/incuc/' + req).success(function(res)
+		{
+
+		})
+	}
+
+	factory.incUT = function(req, callback)
+	{
+		$http.post('/incut/' + req).success(function(res)
+		{
+
+		})
+	}
+
+	factory.getCounters = function(req, callback)
+	{
+		$http.post('/getcounters/' + req).success(function(res)
+		{
+			callback(res);
 		})
 	}
 
