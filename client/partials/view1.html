@@ -1,4 +1,4 @@
-<div id="sign_reg" ng-controller="profileController">
+<div id="sign_reg" ng-controller="logRegController">
 	<div class="container">
 
 		<div class="register">
@@ -20,11 +20,11 @@
 					<p ng-show="userForm.password.$error.minlength && !userForm.password.$pristine" class="help-block">Password must be at least 5 characters long</p>
 				</div>
 				
-				<div class="form-group" ng-class="{ 'has-error': userForm.confirm.$invalid && !userForm.confirm.$pristine }">
+				<!-- <div class="form-group" ng-class="{ 'has-error': userForm.confirm.$invalid && !userForm.confirm.$pristine }">
 					<label>Confirm Password</label>
 					<input type="password" name="confirm" class="form-control" ng-model="newUser.confirm" placeholder="Retype password..." required>
 					<p ng-show="userForm.confirm.$invalid && !userForm.confirm.$pristine" class="help-block">Confirm your password</p>
-				</div>
+				</div> -->
 
 				<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Register User</button>
 			</form>
@@ -33,21 +33,18 @@
 		<div class="signin">
 			<h1>Sign In</h1>
 			<h4 ng-show="error" class="error">{{ error }}</h4>
-			<form name="loginForm" ng-submit="loginUser(loginForm.$valid)" novalidate> <!-- novalidate prevents HTML5 validating because we are using angular validation -->
+			<form name="loginForm" ng-submit="loginUser(loginForm.$valid)" novalidate> 
 				
-				<div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+				<div class="form-group">
 				  <label>Username</label>
 				  <input type="text" name="username" class="form-control" ng-model="returnUser.username" placeholder="Enter username..." required>
-				  <p ng-show="loginForm.username.$invalid && !loginForm.username.$pristine" class="help-block">Your username is required!</p>
 				</div>
 
-				<div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+				<div class="form-group">
 					<label>Password</label>
 					<input type="password" name="password" class="form-control" ng-model="returnUser.password" placeholder="Enter password..." required>
-					<p ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="help-block">Your password is required!</p>
 				</div>
 				
-
 				<button type="submit" class="btn btn-success" ng-disabled="loginForm.$invalid">Login User</button>
 			</form>
 		</div>

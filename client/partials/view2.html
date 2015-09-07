@@ -1,5 +1,6 @@
-<div ng-controller='usersController'>
-	<h1>Welcome {{user.username}}</h1>
+<div ng-controller='topicsController'>
+	<h1 class="main">Welcome {{user.username}}</h1>
+	<input class="btn btn-danger" type="submit" value="Logout" ng-click="logout()"><br><br>
 	<div class='top'>
 		<div class='middle'>
 			<input type='text' ng-model='filter_category' placeholder='search...'>
@@ -10,7 +11,7 @@
 					<th>Category</th>	
 					<th>Topic</th>
 					<th>User Name</th>
-					<th>Posts</th>
+					<th># of Posts</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,6 +34,6 @@
 					<option value='Sports'>Sports</option>
 					<option value='Health'>Health</option>
 				  </select>
-		<input type='submit' value='Submit' ng-click='addTopic(newTopic)'>
+		<input class='btn btn-success' type='submit' value='Submit' ng-click='addTopic(newTopic)'>
 	</div>
 </div>

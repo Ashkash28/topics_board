@@ -1,30 +1,29 @@
 <div ng-controller='wallController'>
 	<div class='top'>
-		<h2>{{topic.username}} posted a topic:</h2>
-		<h4>{{topic.name}}</h4>
-		<h5>{{topic.description}}</h5>
-		<input type = "submit" value="logout" ng-click='logout()'><br><br>
-		<a href='#/dashboard'>DASHBOARD</a>
+		<h1 class='main'>{{topic.name}}</h1>
+		<h2 class='sub'>Description:{{topic.description}}</h2>
+		<input class='btn btn-danger' type='submit' value='Logout' ng-click='logout()'><br><br>
+		<a href='#/dashboard'><button class='btn btn-primary'>Dashboard</button></a>
 	</div>
 
-	<div class='bottom'>
+	<div class='bottom main'>
 		<h2>Post your answer here...</h2>
 		<textarea ng-model='newPost.text'></textarea>
-		<input type='submit' value='Post' ng-click='addPost({text: newPost.text})'>
+		<input class="btn btn-info" type='submit' value='Post' ng-click='addPost({text: newPost.text})'>
 		<div class='post'>
 			<table>
-				<tr ng-repeat='post in posts'>
+				<tr ng-repeat='post in posts | orderBy: "upvote" : true'>
 
-					<td><a href='#/profile/{{post.username}}'>{{post.username}}</a>: {{post.text}}  <input type='submit' value='+' ng-model = 'upvoted' ng-click='upVote(post.id)'>{{post.upvote}}  <input type='submit' value='-' ng-click='downVote(post.id)'>{{post.downvote}}
+					<td><a href='#/profile/{{user.id}}'><h4>{{post.username}}</a>: {{post.text}} </h4> <input class="btn btn-success" type='submit' value='+' ng-model = 'upvoted' ng-click='upVote(post.id)'>{{post.upvote}}  <input class="btn btn-danger" type='submit' value='-' ng-click='downVote(post.id)'>{{post.downvote}}
 						
 
 						<ul ng-repeat='comment in comments'>
-							<li ng-if="comment.post_id == post.id"><a href='#/profile/{{key.username}}'>{{comment.username}}</a>: {{comment.text}}</li>
+							<li ng-if="comment.post_id == post.id"><a href='#/profile/{{user.id}}'><h5>{{comment.username}}</a>: {{comment.text}}</h5></li>
 						</ul>
 						<div class='comment'>
 
 							<textarea ng-model='newComment.text'></textarea>
-							<input type='submit' value='Comment' ng-click='addComment(post.id, {text: newComment.text})'>
+							<input class="btn btn-warning" type='submit' value='Comment' ng-click='addComment(post.id, {text: newComment.text})'>
 
 
 						</div>

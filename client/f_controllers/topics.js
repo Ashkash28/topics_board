@@ -1,4 +1,4 @@
-myAppModule.controller('usersController', function($scope, $location, userFactory, $routeParams, localStorageService)
+myAppModule.controller('topicsController', function($scope, $location, userFactory, $routeParams, localStorageService)
 {
 	$scope.users = [];
 	$scope.user = '';
@@ -30,6 +30,14 @@ myAppModule.controller('usersController', function($scope, $location, userFactor
 			
 		})
 
+	}
+
+	$scope.logout = function(){
+		if(confirm("Are you sure about that?") == true)
+		{
+			localStorageService.remove('user')
+			$location.path('/');
+		}
 	}
 
 })

@@ -2,36 +2,17 @@ myAppModule.controller('profileController', function($scope, $location, userFact
 {
 	$scope.user = localStorageService.get('user');
 
-	$scope.profile = $routeParams.id;
-
-	$scope.addUser = function(isValid) 
+	userFactory.getCounters($scope.user.id, function(data)
 	{
-		if(isValid)
+		$scope.user = data;
+	})
+
+	$scope.logout = function(){
+		if(confirm("Are you sure about that?") == true)
 		{
-			userFactory.registerUser($scope.newUser, function(res)
-			{
-				$scope.success = res;
-			})
-				// $scope.newUser = {};
+			localStorageService.remove('user')
+			$location.path('/');
 		}
 	}
 
-	$scope.loginUser = function(isValid) 
-	{
-		if(isValid)
-		{
-			userFactory.loginUser($scope.returnUser, function(data)
-			{
-				if(data.error != undefined)
-				{
-					$scope.error = data.error;
-				}
-				else
-				{
-					localStorageService.set('user', data);
-					$location.path('/dashboard');
-				}
-			})
-		}
-	}
 })

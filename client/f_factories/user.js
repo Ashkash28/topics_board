@@ -69,9 +69,6 @@ myAppModule.factory('userFactory', function($http){
 
 	factory.addPost = function(req1, req2, req3, callback)
 	{
-		console.log(req1);
-		console.log(req2);
-		console.log(req3);
 		$http.post('/addPost/' + req3, {id: req1, text: req2}).success(function(res)
 		{
 
@@ -80,9 +77,6 @@ myAppModule.factory('userFactory', function($http){
 
 	factory.addComment = function(req1, req2, req3, callback)
 	{
-		console.log(req1);
-		console.log(req2);
-		console.log(req3);
 		$http.post('/addComment/'+ req3, {id: req1, text: req2}).success(function(res)
 		{
 

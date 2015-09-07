@@ -90,9 +90,11 @@ myAppModule.controller('wallController', function($scope, $location, userFactory
 	}
 
 	$scope.logout = function(){
-		console.log('hi');
-		localStorageService.remove('user')
-		$location.path('/');
+		if(confirm("Are you sure about that?") == true)
+		{
+			localStorageService.remove('user')
+			$location.path('/');
+		}
 	}
 
 })

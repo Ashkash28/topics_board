@@ -1,0 +1,51 @@
+body {
+	width: 970px;
+	background-image: url('./../images/background.jpeg');
+	background-repeat: no-repeat;
+}
+
+.main{
+	margin-left: 350px;
+}
+
+.sub{
+	margin-left: 250px;
+}
+
+#counters{
+	margin-left: 450px;
+}
+
+input[placeholder="search..."]{
+	margin-bottom: 5px;
+	margin-left: 1px;
+}
+
+input[value="Logout"]{
+	display: inline-block;
+}
+
+input[value="Dashboard"]{
+	display: inline-block;
+	vertical-align: top;
+
+}
+.register{
+	display: inline-block;
+	margin-left: 20px;
+}
+
+.signin{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 300px;
+	position: absolute;
+}
+
+.success{
+	color: green;
+}
+
+.error{
+	color: red;
+}
